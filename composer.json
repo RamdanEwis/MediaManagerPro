@@ -1,0 +1,26 @@
+{
+  "name": "dev.r.ewais/media-manager-pro",
+  "description": "A Laravel package for image management including saving, updating, resizing, and converting images to WebP format.",
+  "type": "library",
+  "authors": [
+    {
+      "name": "RamadanEwis",
+      "email": "devramdanewsi@gmail.com"
+    }
+  ],
+  "require": {
+    "intervention/image": "^2.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "DevREwais\\MediaManagerPro\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "DevREwais\\MediaManagerPro\\MediaManagerProServiceProvider"
+      ]
+    }
+  }
+}
