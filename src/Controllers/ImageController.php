@@ -1,6 +1,6 @@
 <?php
 
-namespace Vendor\DevREwais\MediaManagerPro\Controllers;
+namespace DevREwaisMediaManagerPro\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;

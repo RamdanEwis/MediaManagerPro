@@ -1,6 +1,6 @@
 <?php
 
-namespace Vendor\DevREwais\MediaManagerPro\Helpers;
+namespace DevREwais\MediaManagerPro\Helpers;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
