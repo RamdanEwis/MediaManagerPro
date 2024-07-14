@@ -1,5 +1,5 @@
 {
-  "name": "dev.r.ewais/media-manager-pro",
+  "name": "DevREwais/media-manager-pro",
   "description": "A Laravel package for image management including saving, updating, resizing, and converting images to WebP format.",
   "type": "library",
   "authors": [
