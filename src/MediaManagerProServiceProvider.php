@@ -1,6 +1,6 @@
 <?php
 
-namespace DevREwais\MediaManagerPro;
+namespace Vendor\DevREwais\MediaManagerPro;
 
 use Illuminate\Support\ServiceProvider;
 
