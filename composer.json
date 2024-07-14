@@ -19,7 +19,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "dev-r-ewais\\MediaManagerPro\\MediaManagerProServiceProvider"
+        "DevREwais\\MediaManagerPro\\MediaManagerProServiceProvider"
       ]
     }
   }
