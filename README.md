@@ -3,4 +3,4 @@ A Laravel package for image management including saving, updating, resizing, and
 
 #### install 
 
-#### composer require dev-r-ewais/media-manager-pro
+#### composer require dev-r-ewais/media-manager-pro v1.0
