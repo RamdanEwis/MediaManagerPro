@@ -10,32 +10,41 @@ class ImageController extends Controller
 {
     public function getImage($width, $storage, $model, $id, $filename)
     {
-        $originalImagePath = "$storage/$model/$id/$filename";
-        if (!Storage::disk('public')->exists($originalImagePath)) {
+        /*        $width = $request->width;
+                if (!isset($width)){
+                    return response()->json(['error' => 'width is required'], 404);
+                }*/
+        $originalImagePathNew = "app/public/$model/$id/$filename";
+        if (!file_exists(storage_path($originalImagePathNew))) {
             return response()->json(['error' => 'Image not found.'], 404);
         }
-
-        $resizedImagePath = $this->saveResizedImage($originalImagePath, $width);
-        return response()->file(storage_path("app/public/{$resizedImagePath}"));
+        $resizedImagePath = $this->saveResizedImage($originalImagePathNew, $width);
+        return response()->file(storage_path("{$resizedImagePath}"));
     }
 
-    protected function saveResizedImage(string $originalImagePath, int $width): string
+    public function saveResizedImage(string $originalImagePath, int $width): string
     {
+        // Define the path for the company folder
         $folderPath = pathinfo($originalImagePath, PATHINFO_DIRNAME);
         $originalFilename = pathinfo($originalImagePath, PATHINFO_FILENAME);
-        $extension = 'webp';
-        $resizedFilename = "{$originalFilename}_{$width}.{$extension}";
+        $originalExtension = pathinfo($originalImagePath, PATHINFO_EXTENSION);
+        $extension = ($originalExtension == '.webp') ? $originalExtension : '.webp';
+        // Define the resized image filename
+        $resizedFilename = "{$originalFilename}_{$width}{$extension}";
         $resizedImagePath = "{$folderPath}/{$resizedFilename}";
-
-        if (Storage::disk('public')->exists($resizedImagePath)) {
+        if (file_exists(storage_path($resizedImagePath))) {
             return $resizedImagePath;
         }
-
-        $image = Image::make(storage_path("app/public/{$originalImagePath}"))->encode('webp', 90);
+        // Load the original image
+        $image = Image::make(storage_path($originalImagePath));
+        // Calculate new dimensions
         $aspectRatio = $image->width() / $image->height();
         $newHeight = $width / $aspectRatio;
-        $image->resize($width, $newHeight)->save(storage_path("app/public/{$resizedImagePath}"));
-
+        if ($originalExtension != 'webp') {
+            $image->encode('webp', 90)->resize($width, $newHeight)->save(storage_path($resizedImagePath));
+            return $resizedImagePath;
+        }
+        $image->resize($width, $newHeight)->save(storage_path($resizedImagePath));
         return $resizedImagePath;
     }
 }
